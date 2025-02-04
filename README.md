@@ -7,8 +7,10 @@
 	 cd TaskManagerApp
 3. Install dependencies:
 	npm install
-4.Run the project:
-	 npx expo start
+   
+4. Run the project:
+	npx expo start 
+
 
 **📌 Step 1: Install Expo CLI and Set Up Git**
 
