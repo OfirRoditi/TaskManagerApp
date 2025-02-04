@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# Welcome to your Expo app 👋exp
 
 ## Get started
 1. Clone the repository:
@@ -10,35 +10,57 @@
 4.Run the project:
 	 npx expo start
 
-In the output, you'll find options to open the app in a
+**📌 Step 1: Install Expo CLI and Set Up Git**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### **1️⃣ Install Expo CLI**
+Since the legacy Expo CLI does not support Node 17+, we will install the new Expo CLI locally.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+#### **Uninstall the Old Expo CLI (if installed)**
+```sh
+npm uninstall -g expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+#### **Install the New Expo CLI Locally**
+```sh
+npx create-expo-app TaskManagerApp
+```
+✅ This creates a folder named `TaskManagerApp` on your **Desktop**.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+### **2️⃣ Git: Push Updates to GitHub**
+After making changes to your project, follow these steps to push them to GitHub.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+#### **1. Check for Changes**
+```sh
+git status
+```
+✅ This shows modified or untracked files.
 
-## Join the community
+#### **2. Stage the Changes**
+```sh
+git add .
+```
+✅ Stages all changes for commit.
 
-Join our community of developers creating universal apps.
+📌 To stage specific files only, use:
+```sh
+git add <filename>
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+#### **3. Commit the Changes**
+```sh
+git commit -m "Updated 04/02/2025"
+```
+✅ Adds a meaningful commit message.
+
+#### **4. Push to GitHub**
+```sh
+git push origin main
+```
+✅ Uploads your changes to the GitHub repository.
+
+---
+
+### **Next Steps**
+Now that Expo is installed and Git is set up, we can move on to **Step 2: Building the Main Screen UI**.
