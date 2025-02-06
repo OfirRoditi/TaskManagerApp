@@ -4,9 +4,10 @@ import { View, Text, Button, StyleSheet } from "react-native";
 export default function TaskList({ tasks, setTasks }) 
 {
     useEffect(() => {
-        console.log("📢 useEffect is running: Fetching tasks...");
+        // console.log("📢 useEffect is running: Fetching tasks...");
     fetchTasks();//Calling to method
   }, []);
+  
  
   const [loading, setLoading] = useState(true);
 
@@ -14,10 +15,13 @@ export default function TaskList({ tasks, setTasks })
   const fetchTasks = async () => 
     {
     try {
+        
       setLoading(true);//Displays "Loading tasks..." while fetching.
       const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5");
       const data = await response.json();//Converts API response into JavaScript objects.
       setTasks(data);//setTasks(data) updates tasks in index.tsx.
+
+      console.log("📋 Full Task List (After Fetch):", data); // ✅ Log all tasks after fetching
     } catch (error) {
       console.error("Error fetching tasks:", error);
     } finally {
@@ -58,7 +62,6 @@ export default function TaskList({ tasks, setTasks })
 
       //React updates the UI with the new task.
       setTasks(tasks.map(task => task.id === id ? { ...task, completed: true } : task));
-      console.log("🔄 Updated task list:", tasks);
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
@@ -74,8 +77,9 @@ export default function TaskList({ tasks, setTasks })
       ) : (
         tasks.map((task) => (
           <View key={task.id} style={styles.taskContainer}>
+            {/* Creating text elemnt for each task */}
             <Text style={[styles.task, task.completed && styles.completedTask]}>
-              {task.id}. {task.title} {task.completed ? "✅" : "❌"}
+              {task.id}. {task.title} {task.details} {task.completed ? "✅" : "❌"}
             </Text>
             {!task.completed && (
               <Button title="✔ Complete" onPress={() => completeTask(task.id)} />

@@ -5,6 +5,7 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 export default function TaskInput({ tasks, setTasks }) {
 
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskDetail, setNewTaskDetalis] = useState("");
 
 
   //Add Task method
@@ -16,37 +17,67 @@ export default function TaskInput({ tasks, setTasks }) {
       const newTask = {
         id: lastTaskId + 1,
         title: newTaskTitle,
+        details: newTaskDetail, // ✅ New field added!
         completed: false,
         userId: 1,
       };
 
-      const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=5", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),
       });
+      
+      const data = await response.json(); 
 
-      const data = await response.json();
+      //Making sure API respone for the new task.
+      console.log("📩 API Response (TaskInput):", data);
+      
+      //  prevTasks = Current task list.
+      setTasks((prevTasks) => {
 
-      setTasks([...tasks, { ...data, id: newTask.id }]);// adds the new task to the existing list.
+        //...prevTasks=Copies all existing tasks into a new array
+        //{ ...data } copies all key-value pairs from the API response.
+        //id: newTask.id=Making sure the id in API is UI id
+        console.log("TaskID:",newTask.id)
+        console.log("DataID:",data.id)
+        const updatedTasks = [...prevTasks, { ...data, id: newTask.id }];
+        console.log("📩 Tasks after Insert newTask (Corrected):", updatedTasks);
+        console.log("TaskID:",newTask.id)
+        console.log("DataID:",data.id)
+        return updatedTasks;
+      });
+      
       setNewTaskTitle("");//Refresh the task box
+      setNewTaskDetalis("")
+      
     } catch (error) {
       console.error("Error adding task:", error);
     }
   };
-  //Finish Task method
+  //Finish Add - Task method
 
   // User Input Field
   return (
     <View>
       <Text>Enter a New Task:</Text>
+      {/* Sture the user types */}
       <TextInput
         style={styles.input}
         placeholder="Type your task..."
         value={newTaskTitle}
+        // text is stored inside the newTaskTitle variable - automatically updates the state variable
         onChangeText={setNewTaskTitle}
       />
-      <Button title="Add Task" onPress={addTask} />
+      <Text>Enter task detalis:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Additional Info"
+        value={newTaskDetail}
+        // text is stored inside the newTaskDetail variable.
+        onChangeText={setNewTaskDetalis} // Updates the details state
+        />
+      <Button title="Add Task Detalis" onPress={addTask} />
     </View>
   );
 }
