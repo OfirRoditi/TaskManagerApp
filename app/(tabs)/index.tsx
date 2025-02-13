@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import TaskList from "../../components/TaskList";
 import TaskInput from "../../components/TaskInput";
 
+
 export default function IndexScreen() 
 {
   const [taskList, setTasks] = useState([]); // Stores tasks in tasksList - Holds an array of tasks

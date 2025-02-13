@@ -39,12 +39,11 @@ export default function TaskInput({ tasks, setTasks }) {
         //...prevTasks=Copies all existing tasks into a new array
         //{ ...data } copies all key-value pairs from the API response.
         //id: newTask.id=Making sure the id in API is UI id
-        console.log("TaskID:",newTask.id)
-        console.log("DataID:",data.id)
+
         const updatedTasks = [...prevTasks, { ...data, id: newTask.id }];
         console.log("📩 Tasks after Insert newTask (Corrected):", updatedTasks);
-        console.log("TaskID:",newTask.id)
-        console.log("DataID:",data.id)
+        // console.log("TaskID:",newTask.id)
+        // console.log("DataID:",data.id)
         return updatedTasks;
       });
       
